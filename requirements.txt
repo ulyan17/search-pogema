@@ -1,0 +1,16 @@
+# Python 3.11 (pogema 1.3.1 pins numpy<=1.23.5 / pydantic<=1.9.1, which do not build on 3.12+)
+pogema==1.3.1
+# installed with --no-deps: only its map generators are used (pure numpy + yaml)
+# pip install --no-deps pogema-toolbox==0.1.1
+gymnasium==0.28.1
+numpy==1.23.5
+pydantic==1.9.1
+scipy==1.10.1
+matplotlib==3.8.3
+pandas==2.0.3
+pyyaml==6.0.1
+imageio==2.34.2
+tqdm==4.66.5
+pytest==8.3.3
+torch==2.3.1        # stage 3 (IPPO), CPU use; PyPI wheel (download.pytorch.org unavailable here)
+tabulate==0.9.0

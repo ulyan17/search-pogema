@@ -1,0 +1,19 @@
+# Stage 4 slice: structured maps from pogema-toolbox (maze, warehouse), uniform targets. Seeds 0..9.
+# (warehouse layout is deterministic per size; maze uses density 0.2)
+name: slice_maps
+output: results/slice_maps.csv
+seeds: {start: 0, count: 10}
+base: {target_dist: uniform, num_targets: 3, density: 0.2, start: cluster}
+grid:
+  map_type: [maze, warehouse]
+  size: [32, 64]
+  num_agents: [8, 16, 32]
+  fail_frac: [0.0, 0.5]
+methods:
+  - {label: random_walk, policy: random_walk}
+  - {label: levy, policy: levy}
+  - {label: frontier, policy: frontier, task: {comm_radius: 0}}
+  - {label: frontier_comm, policy: frontier_comm, task: {comm_radius: [2, 5, inf]}}
+  - {label: frontier_coord, policy: frontier_coord, task: {comm_radius: [2, 5, inf]}}
+  - {label: swarm, policy: swarm}
+  - {label: ippo, policy: ippo, kwargs: {path: runs/ippo_v1/model_final.pt}, task: {comm_radius: [0, inf]}}

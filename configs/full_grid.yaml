@@ -1,0 +1,20 @@
+# Stage 4: full experiment grid (uniform targets, random maps), evaluation seeds 0..19.
+# r_c only varies for methods that use communication. IPPO: no comm (vs swarm) and global (upper bound).
+name: full_grid
+output: results/full_grid.csv
+seeds: {start: 0, count: 20}   # run seed-major; first pass: 10 seeds (--max-seed)
+base: {map_type: random, target_dist: uniform, obs_radius: 3, detect_radius: 2, start: cluster}
+grid:
+  size: [16, 32, 64]
+  density: [0.0, 0.1, 0.2, 0.3]
+  num_agents: [4, 8, 16, 32, 64]
+  num_targets: [1, 3]
+  fail_frac: [0.0, 0.25, 0.5]
+methods:
+  - {label: random_walk, policy: random_walk}
+  - {label: levy, policy: levy}
+  - {label: frontier, policy: frontier, task: {comm_radius: 0}}
+  - {label: frontier_comm, policy: frontier_comm, task: {comm_radius: [2, 5, inf]}}
+  - {label: frontier_coord, policy: frontier_coord, task: {comm_radius: [2, 5, inf]}}
+  - {label: swarm, policy: swarm}
+  - {label: ippo, policy: ippo, kwargs: {path: runs/ippo_v1/model_final.pt}, task: {comm_radius: [0, inf]}}

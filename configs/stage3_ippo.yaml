@@ -1,0 +1,13 @@
+# Stage 3: IPPO (checkpoint it 815, chosen on tuning seeds) on the stage-2 grid, evaluation seeds 0..19.
+# Trained with comm_radius in {0, 5}; evaluated also with global communication (zero-shot).
+name: stage3_ippo
+output: results/stage3_ippo.csv
+seeds: {start: 0, count: 20}
+base: {map_type: random, density: 0.2, num_targets: 3, obs_radius: 3, detect_radius: 2, start: cluster}
+grid:
+  size: [16, 32]
+  num_agents: [4, 16]
+  target_dist: [uniform, prior]
+  fail_frac: [0.0, 0.5]
+methods:
+  - {label: ippo, policy: ippo, kwargs: {path: runs/ippo_v1/model_final.pt}, task: {comm_radius: [0, 5, inf]}}

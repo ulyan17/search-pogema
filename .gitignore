@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+runs/*/model_latest.pt
+runs/*/model_phase*.pt
+runs/*/checkpoint.pt.tmp
+report/*.aux
+report/*.log
+report/*.out

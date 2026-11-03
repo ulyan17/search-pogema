@@ -1,0 +1,16 @@
+# Quick check of an IPPO checkpoint on TUNING seeds (10000+), sampled vs greedy action selection.
+name: ippo_check
+output: results/ippo_check.csv
+seeds: {start: 10000, count: 10}
+base: {map_type: random, density: 0.2, num_targets: 3, start: cluster}
+grid:
+  size: [16, 32]
+  num_agents: [4, 16]
+  target_dist: [uniform, prior]
+methods:
+  - {label: ippo_it179_sample, policy: ippo, kwargs: {path: runs/ippo_v1/model_it179.pt, greedy: false}}
+  - {label: ippo_it179_greedy, policy: ippo, kwargs: {path: runs/ippo_v1/model_it179.pt, greedy: true}}
+  - {label: swarm, policy: swarm}
+  - {label: frontier, policy: frontier}
+  - {label: ippo_it533_sample, policy: ippo, kwargs: {path: runs/ippo_v1/model_it533.pt, greedy: false}}
+  - {label: ippo_it815_sample, policy: ippo, kwargs: {path: runs/ippo_v1/model_it815.pt, greedy: false}}

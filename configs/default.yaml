@@ -1,0 +1,18 @@
+# Default task configuration (fields of pogema_search.env.SearchConfig)
+map_type: random          # random | maze | warehouse
+size: 32
+density: 0.2
+num_agents: 16
+num_targets: 3
+target_dist: uniform      # uniform | prior
+prior_sigma_frac: 0.15
+start: cluster            # cluster | uniform
+obs_radius: 3
+detect_radius: 2
+comm_radius: 0            # 0 = none, inf = global
+fail_frac: 0.0
+fail_window: [0.0, 0.5]
+failed_blocks: true
+max_steps: null           # null -> 8 * size
+stop_when_all_found: true
+seed: 0

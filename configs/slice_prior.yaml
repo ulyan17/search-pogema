@@ -1,0 +1,18 @@
+# Stage 4 slice: targets drawn from a Gaussian prior known to the agents. Evaluation seeds 0..9.
+name: slice_prior
+output: results/slice_prior.csv
+seeds: {start: 0, count: 10}
+base: {map_type: random, target_dist: prior, num_targets: 3, start: cluster}
+grid:
+  size: [32, 64]
+  density: [0.1, 0.2]
+  num_agents: [8, 16, 32]
+  fail_frac: [0.0, 0.5]
+methods: &methods
+  - {label: random_walk, policy: random_walk}
+  - {label: levy, policy: levy}
+  - {label: frontier, policy: frontier, task: {comm_radius: 0}}
+  - {label: frontier_comm, policy: frontier_comm, task: {comm_radius: [2, 5, inf]}}
+  - {label: frontier_coord, policy: frontier_coord, task: {comm_radius: [2, 5, inf]}}
+  - {label: swarm, policy: swarm}
+  - {label: ippo, policy: ippo, kwargs: {path: runs/ippo_v1/model_final.pt}, task: {comm_radius: [0, inf]}}

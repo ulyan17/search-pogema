@@ -1,0 +1,16 @@
+# Stage 2: first comparison of baselines on a small grid (evaluation seeds 0..19).
+name: stage2_small
+output: results/stage2_small.csv
+seeds: {start: 0, count: 20}
+base: {map_type: random, density: 0.2, num_targets: 3, obs_radius: 3, detect_radius: 2, start: cluster}
+grid:
+  size: [16, 32]
+  num_agents: [4, 16]
+  target_dist: [uniform, prior]
+  fail_frac: [0.0, 0.5]
+methods:
+  - {label: random_walk, policy: random_walk}
+  - {label: levy, policy: levy}
+  - {label: frontier, policy: frontier, task: {comm_radius: 0}}
+  - {label: frontier_comm, policy: frontier_comm, task: {comm_radius: [2, 5, inf]}}
+  - {label: swarm, policy: swarm}
